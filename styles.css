@@ -152,7 +152,7 @@ outline: none;
 }
 .result-container {
     width: 50%;
-    height: 100vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
 }
