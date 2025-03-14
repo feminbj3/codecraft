@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCraft | Online Code Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-code logo-icon"></i>
+            CodeCraft
+        </div>
+        <div class="actions">
+            <button id="btnSave"><i class="fas fa-save"></i> Save</button>
+            <button id="btnLoad"><i class="fas fa-folder-open"></i> Load</button>
+            <button id="btnClear"><i class="fas fa-trash-alt"></i> Clear</button>
+            <button id="btnRun" class="btn-run"><i class="fas fa-play"></i> Run</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="editor-container">
+            <div class="tab-container">
+                <div class="tab active" data-tab="html">
+                    <i class="fab fa-html5 tab-icon html-icon"></i> HTML
+                </div>
+                <div class="tab" data-tab="css">
+                    <i class="fab fa-css3-alt tab-icon css-icon"></i> CSS
+                </div>
+                <div class="tab" data-tab="js">
+                    <i class="fab fa-js-square tab-icon js-icon"></i> JavaScript
+                </div>
+            </div>
+
+            <div class="editor-pane active" id="html-pane">
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="html-line-numbers">1</div>
+                    <textarea id="html-editor" class="editor-textarea editor-with-line-numbers" placeholder="<!-- Write your HTML here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to CodeCraft!</h1>
+        <p>This is your live code editor. Edit HTML, CSS, and JavaScript to see instant results.</p>
+        <button id="demo-btn">Click Me!</button>
+    </div>
+</body>
+</html></textarea>
+                </div>
+            </div>
+
+            <div class="editor-pane" id="css-pane">
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="css-line-numbers">1</div>
+                    <textarea id="css-editor" class="editor-textarea editor-with-line-numbers" placeholder="/* Write your CSS here */">
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 80%;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    color: #f8f9fa;
+    font-size: 2.5rem;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+button {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}</textarea>
+                </div>
+            </div>
+
+            <div class="editor-pane" id="js-pane">
+                <div class="editor-wrapper">
+                    <div class="line-numbers" id="js-line-numbers">1</div>
+                    <textarea id="js-editor" class="editor-textarea editor-with-line-numbers" placeholder="// Write your JavaScript here">
+document.addEventListener('DOMContentLoaded', () => {
+    const button = document.getElementById('demo-btn');
+    
+    let clicks = 0;
+    
+    button.addEventListener('click', () => {
+        clicks++;
+        button.textContent = `Clicked ${clicks} time${clicks !== 1 ? 's' : ''}!`;
+        
+        // Add some animation
+        button.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            button.style.transform = 'scale(1)';
+        }, 200);
+        
+        // Change background color
+        document.body.style.background = getRandomGradient();
+    });
+});
+
+function getRandomGradient() {
+    const colors = [
+        '#667eea, #764ba2',
+        '#a18cd1, #fbc2eb',
+        '#ff9a9e, #fad0c4',
+        '#6a11cb, #2575fc',
+        '#37ecba, #72afd3'
+    ];
+    
+    return `linear-gradient(135deg, ${colors[Math.floor(Math.random() * colors.length)]})`;
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-container">
+            <div class="result-header">
+                <div>Output</div>
+                <i class="fas fa-sync-alt refresh-icon" id="refreshResult"></i>
+            </div>
+            <div class="result-pane">
+                <iframe id="result-frame"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-left">
+            <div class="status-item" id="auto-save-status">
+                <i class="fas fa-save"></i> Auto-saving
+            </div>
+            <div class="status-item">
+                <i class="fas fa-clock"></i> Last update: <span id="last-update">Just now</span>
+            </div>
+        </div>
+        <div class="status-right">
+            <div class="status-item">
+                <i class="fas fa-code"></i> CodeCraft v1.0
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-info-circle"></i>
+        <span id="notification-message">Changes saved successfully!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
