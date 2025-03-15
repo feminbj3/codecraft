@@ -157,7 +157,7 @@ CodeCraft is compatible with all modern browsers:
 3. Open `index.html` in your preferred browser
 
 ### Web Version
-Visit [codecraft.example.com](https://codecraft.example.com) to use the online version without installation.
+Visit [[codecraft.example.com](https://codecraft.example.com)](https://codecraftcodeeditor.netlify.app/) to use the online version without installation.
 
 ## Future Enhancements
 
